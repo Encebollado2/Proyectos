@@ -1,51 +1,202 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/flowers.png" type="image/x-icon">
+    <title> Para mi Macare Hermosa💖</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+        /* Estilo del texto animado */
+        .title {
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px #ff4d6d, 0 0 30px #ff4d6d, 0 0 50px #ff4d6d;
+            animation: fadeIn 2s ease-in-out;
+        }
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+        /* Texto especial */
+        .greetings {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ff4d6d;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff4d6d;
+        }
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+        /* Contenedor de los botones */
+        .buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            position: relative; /* Asegura que el contenedor sea el referente para los botones */
+        }
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+        /* Botón de "Sí, obvio" */
+        .yes-button {
+            background-color: #ff4d6d;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
+        }
 
-jobs:
-  # Build job
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        .yes-button:hover {
+            background-color: #d43f57;
+            transform: scale(1.1);
+        }
 
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        /* Botón de "No" */
+        .no-button {
+            background-color: #555;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            position: relative; /* Necesitamos esta posición para moverlo */
+        }
+
+        .no-button:hover {
+            background-color: #ff4d6d;
+            transform: scale(1.1);
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Partículas animadas (luciérnagas) */
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #ff4d6d;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: particleMove 4s ease-in-out infinite, flicker 1.5s infinite;
+        }
+
+        /* Movimiento de las luciérnagas */
+        @keyframes particleMove {
+            0% {
+                top: calc(50% - 20px);
+                left: calc(50% - 20px);
+            }
+            25% {
+                top: calc(80% - 20px);
+                left: calc(30% - 20px);
+            }
+            50% {
+                top: calc(20% - 20px);
+                left: calc(70% - 20px);
+            }
+            75% {
+                top: calc(60% - 20px);
+                left: calc(90% - 20px);
+            }
+            100% {
+                top: calc(50% - 20px);
+                left: calc(50% - 20px);
+            }
+        }
+
+        /* Efecto de parpadeo para simular luciérnagas */
+        @keyframes flicker {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+    </style>
+    <script>
+        // Función para generar partículas (luciérnagas)
+        function generateParticles() {
+            const particleCount = 30; // Número de luciérnagas
+            for (let i = 0; i < particleCount; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                document.body.appendChild(particle);
+
+                // Posicionar la luciérnaga aleatoriamente
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+
+                // Eliminar la luciérnaga después de un tiempo
+                setTimeout(() => {
+                    particle.remove();
+                }, 4000);
+            }
+        }
+
+        // Llamar a la función para generar luciérnagas cada 2 segundos
+        setInterval(generateParticles, 2000);
+
+        // Hacer que el botón "No" huya del cursor
+        window.onload = () => {
+            // Eliminar la clase "container" al cargar la página
+            document.body.classList.remove("container");
+
+            const noButton = document.querySelector('.no-button');
+            noButton.addEventListener('mouseenter', function(e) {
+                const buttonWidth = noButton.offsetWidth;
+                const buttonHeight = noButton.offsetHeight;
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+
+                const maxX = windowWidth - buttonWidth;
+                const maxY = windowHeight - buttonHeight;
+
+                // Generar un movimiento aleatorio para el botón
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+
+                // Mover el botón a la nueva posición aleatoria
+                noButton.style.position = 'absolute';
+                noButton.style.left = `${randomX}px`;
+                noButton.style.top = `${randomY}px`;
+            });
+        };
+    </script>
+</head>
+<body>
+
+    <div class="title">¿Salimos a comer en San Valentin? 💖</div>
+    
+    <div class="greetings">Para mi Chachita hermosa 💖</div>
+
+    <div class="buttons">
+        <button class="yes-button" onclick="window.location.href='flower.html'">Sí, mi amor ❤️</button>
+        <button class="no-button" onclick="alert('Ay Natalia Chacha por que dijiste que no andas muy payasa o que')">No 💔</button>
+    </div>
+</body>
+</html>
